@@ -1,8 +1,8 @@
 define([
-	'js/point.js'
+	'point'
 	], function(){
 
-	var point = require('js/point.js');
+	var point = require('point');
 
 function vectorAxis(){
 
@@ -51,7 +51,7 @@ function vectorAxis(){
 			return this.endPoint;
 		}
 
-		var pt = require('js/point.js');
+		var pt = require('point');
 		pt.x = (x2 - x1) / (max - min) * (value - min);
 		pt.y = (y2 - y1) / (max - min) * (value - min);
 

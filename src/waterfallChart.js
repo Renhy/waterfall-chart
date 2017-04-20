@@ -1,10 +1,10 @@
 define([
-	'js/point.js',
-	'js/vectorAxis.js'
+	'point',
+	'vectorAxis'
 	], function(){
 
-var point = require('js/point.js');
-var vectorAxis = require('js/vectorAxis.js');
+var point = require('point');
+var vectorAxis = require('vectorAxis');
 
 function waterfallChart(){
 	this.canvas = document.createElement('canvas');
