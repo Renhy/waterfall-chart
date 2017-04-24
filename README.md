@@ -8,12 +8,22 @@
   
     
       
-常见的瀑布图：
-![cood](https://github.com/Renhy/waterfall-chart/raw/master/pictures/example.jpg)
-这些瀑布图大多是一次性绘制，为了能旋转视角，更好的观察，基于H5 canvas画板开发了这套瀑布图图表控件
+常见的瀑布图：  
+![cood](https://github.com/Renhy/waterfall-chart/raw/master/pictures/example.jpg)  
+这些瀑布图大多是一次性绘制，为了能旋转视角，更好的观察，基于H5 canvas画板开发了这套瀑布图图表控件。
 
+###实现
+建立一个XYZ三轴坐标系场景，模拟3D立体效果  
+以原点出发，设置三条坐标轴，X、Y、Z  
+不同于XY坐标系中X轴和Y轴直接返回数据点对应x,y值  
+在该坐标系总数据点控件坐标分别返回对应轴中与原点o的相对向量
+![cood](https://github.com/Renhy/waterfall-chart/raw/master/pictures/coordinate.png)  
+如上图，空间中有点A(x, y, z).  
+三维坐标分别投影到XYZ轴，得到向量OA_x、OA_y、OA_z  
+最终计算得出A点在画布中绘制位置为A(a_x, a_y) 其中:  
+a_x = OA_x.x + OA_y.x + OA_z.x;  
+a_y = OA_x.y + OA_y.y + OA_z.y;  
 
-	
-![cood](https://github.com/Renhy/waterfall-chart/raw/master/pictures/coordinate.png)
-	
-	
+###效果  
+![cood](https://github.com/Renhy/waterfall-chart/raw/master/pictures/waterfall.png)  
+

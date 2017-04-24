@@ -242,7 +242,7 @@ function waterfallChart(){
 
 			var c = 230 - (230 - 130) / freqData.length * i;
 			var fill = "rgba(" + c.toString() + ", " + c.toString() + ", " + c.toString() + ", 1)";
-			var line = "rgba(49, 110, 175, 1)";
+			var line = "rgba(0, 13, 255, 1)";
 
 			drawPolygon(ctx, 1, line, fill, pts);
 		}
