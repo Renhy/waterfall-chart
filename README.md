@@ -1,9 +1,13 @@
 # waterfall-chart
-	瀑布图控件
-	可用于转子动力学分析使用，能同时将大量的频谱图按照预设参数（转速、时间等）进行绘制，直观地分析。
+# 瀑布图控件
+
+###介绍
+在振动分析的应用场景中，需要将连续时刻的频域信号叠加显示，以观察振动信号的变化趋势。  
+常见的图谱都是基于XY轴建立的笛卡尔坐标系，可以绘制(x, y)数据点的应用。  
+而在振动分析中，每一组数据都是在某个具体时间点上的一组频域信号：  
+![cood](https://github.com/Renhy/waterfall-chart/raw/master/pictures/example.jpg)
+
 	
-	
-![cood](Renhy/waterfall-chart/blob/master/coordinate.png)
-	
+![cood](https://github.com/Renhy/waterfall-chart/raw/master/pictures/coordinate.png)
 	
 	
