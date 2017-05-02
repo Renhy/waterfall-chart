@@ -17,7 +17,7 @@ function vectorAxis(){
 	this.valueType = "num";
 	this.lineWidth = 2;
 	this.lineColor = "rgba(0,0,0,1)";
-	this.scaleAutoCount = -1;
+	this.scaleDistance = 50;
 
 	this.render = function(ctx){
 
@@ -25,16 +25,68 @@ function vectorAxis(){
 
 		//begin render scales
 		var distance = getDistance(this.startPoint, this.endPoint);
-		var scaleCount = 5;
-		if(this.scaleAutoCount == -1){
-			scaleCount = distance / 200;
-			scaleCount = Math.floor(scaleCount);
+		var scaleCount = Math.floor(distance / this.scaleDistance);
+		var delta = 0;
+		if(Math.abs(this.maximum - this.minimum) > scaleCount){
+			delta = Math.floor(this.maximum - this.minimum) / scaleCount;
+		}else{
+			delta = (this.maximum - this.minimum) / scaleCount;
 		}
+
+		var scaleValues = new Array(scaleCount);
+		for(var i = 0; i < scaleCount; i++){
+			scaleValues[i] = (this.minimum + delta * (i + 1));
+		}
+
+		var length = 10;
+
+		//竖直轴
+		if(this.endPoint.x - this.startPoint.x == 0){
+			for(var i = 0; i < scaleCount; i++){
+				var pt = this.getPoint(scaleValues[i]);
+				var pt1 = new point(pt.x + this.startPoint.x, pt.y + this.startPoint.y);
+				var pt2 = new point(pt1.x - length, pt1.y);
+
+				renderLine(ctx, 1, this.lineColor, pt1, pt2);
+			}
+			return;
+		}
+
+		//水平轴
+		if(this.endPoint.y - this.startPoint.y == 0){
+			for(var i = 0; i < scaleCount; i++){
+				var pt = this.getPoint(scaleValues[i]);
+				var pt1 = new point(pt.x + this.startPoint.x, pt.y + this.startPoint.y);
+				var pt2 = new point(pt1.x, pt1.y + length);
+				renderLine(ctx, 1, this.lineColor, pt1, pt2);
+			}
+			return;
+		}
+
+		//斜轴
+		var angle_axis = Math.atan((this.endPoint.y - this.startPoint.y) / (this.endPoint.x - this.startPoint.x));
+		var angle_scale;
+		if(this.endPoint.x - this.startPoint.x > 0){
+			angle_scale = angle_axis - Math.PI / 2;
+		}else{
+			angle_scale = angle_axis + Math.PI / 2;
+		}
+
+		var dx = length * Math.cos(angle_scale);
+		var dy = length * Math.sin(angle_scale);
+		for(var i = 0; i < scaleCount; i++){
+			var pt = this.getPoint(scaleValues[i]);
+			var pt1 = new point(pt.x + this.startPoint.x, pt.y + this.startPoint.y);
+			var pt2 = new point(pt1.x + dx, pt1.y + dy);
+			renderLine(ctx, 1, this.lineColor, pt1, pt2);
+		}
+
 
 
 
 	}
 
+	//返回value值在轴上的点相对于startPoint的相对位移向量
 	this.getPoint = function(value){
 		var x1 = this.startPoint.x;
 		var y1 = this.startPoint.y;
@@ -99,7 +151,7 @@ function vectorAxis(){
 	}
 
 	function getDistance(pt1, pt2){
-		return Math.sqrt(Math.pow(pt1.x - pt2.x) + Math.pow(pt1.y - pt2.y));
+		return Math.sqrt(Math.pow((pt1.x - pt2.x), 2) + Math.pow((pt1.y - pt2.y), 2));
 	}
 
 

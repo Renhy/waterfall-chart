@@ -48,6 +48,7 @@ function waterfallChart(){
 		render();
 	}
 
+	//输入X轴角度，计算XYZ在平面内分布
 	function axisAlgorithm(alpha){
 		angle_x = alpha;
 		var angle_z = Math.PI * 2 / 3 - Math.abs(angle_x - Math.PI / 4) * 4 / 15;
